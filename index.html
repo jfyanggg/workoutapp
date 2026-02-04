@@ -7,36 +7,15 @@
     <style>
         :root {
             --sf-pro: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-        }
-
-        /* Light Theme */
-        [data-theme="light"] {
-            --primary: #007AFF;
-            --secondary: #8E8E93;
-            --background: #F2F2F7;
-            --card: #FFFFFF;
-            --text: #1C1C1E;
-            --text-secondary: #8E8E93;
-            --border: rgba(0, 0, 0, 0.1);
-            --overlay: rgba(0, 0, 0, 0.4);
-            --green: #34C759;
-            --red: #FF3B30;
-            --orange: #FF9500;
-        }
-
-        /* Dark Theme */
-        [data-theme="dark"] {
-            --primary: #0A84FF;
-            --secondary: #98989D;
-            --background: #000000;
-            --card: #1C1C1E;
-            --text: #FFFFFF;
-            --text-secondary: #98989D;
-            --border: rgba(255, 255, 255, 0.1);
-            --overlay: rgba(0, 0, 0, 0.6);
-            --green: #30D158;
-            --red: #FF453A;
-            --orange: #FF9F0A;
+            --ios-blue: #007AFF;
+            --ios-light-blue: #5AC8FA;
+            --ios-gray: #8E8E93;
+            --ios-light-gray: #F2F2F7;
+            --ios-dark: #1C1C1E;
+            --ios-card: #FFFFFF;
+            --ios-green: #34C759;
+            --ios-red: #FF3B30;
+            --ios-orange: #FF9500;
         }
 
         * {
@@ -48,17 +27,19 @@
 
         body {
             font-family: var(--sf-pro);
-            background: var(--background);
+            background: var(--ios-light-gray);
             min-height: 100vh;
-            color: var(--text);
+            padding: 0;
+            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            transition: background 0.3s ease;
         }
 
+        /* Header */
         .header {
-            background: var(--card);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 0.5px solid var(--border);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
             padding: 12px 20px;
             position: sticky;
             top: 0;
@@ -69,83 +50,80 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 428px;
-            margin: 0 auto;
+            max-width: 100%;
         }
 
         .header-title {
             font-size: 17px;
             font-weight: 600;
+            color: var(--ios-dark);
             letter-spacing: -0.4px;
         }
 
         .header-button {
             background: none;
             border: none;
-            color: var(--primary);
+            color: var(--ios-blue);
             font-size: 17px;
+            font-weight: 400;
             cursor: pointer;
-            padding: 4px 8px;
-            min-width: 60px;
+            padding: 4px 0;
         }
 
         .header-button:active {
             opacity: 0.4;
         }
 
-        .header-button.invisible {
-            visibility: hidden;
-        }
-
+        /* Container */
         .container {
             max-width: 428px;
             margin: 0 auto;
-        }
-
-        .screen {
-            padding: 20px;
+            padding: 0;
             min-height: calc(100vh - 50px);
+            display: flex;
+            flex-direction: column;
         }
 
-        .playlist-card {
-            background: var(--card);
+        /* Home Screen */
+        .home-screen {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .workout-card {
+            background: var(--ios-card);
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 12px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
-        .playlist-header {
+        .workout-card-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             margin-bottom: 8px;
         }
 
-        .playlist-title {
+        .workout-card-title {
             font-size: 17px;
             font-weight: 600;
-            margin-bottom: 4px;
+            color: var(--ios-dark);
         }
 
-        .playlist-color {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-        }
-
-        .playlist-info {
+        .workout-card-info {
             font-size: 13px;
-            color: var(--text-secondary);
+            color: var(--ios-gray);
             margin-bottom: 12px;
         }
 
-        .playlist-actions {
+        .workout-card-actions {
             display: flex;
             gap: 8px;
         }
 
         .btn-ios {
+            flex: 1;
             padding: 10px 16px;
             border: none;
             border-radius: 8px;
@@ -153,7 +131,6 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            font-family: var(--sf-pro);
         }
 
         .btn-ios:active {
@@ -161,36 +138,28 @@
             transform: scale(0.98);
         }
 
-        .btn-primary {
-            background: var(--primary);
+        .btn-primary-ios {
+            background: var(--ios-blue);
             color: white;
-            flex: 1;
         }
 
-        .btn-secondary {
-            background: var(--background);
-            color: var(--primary);
+        .btn-secondary-ios {
+            background: var(--ios-light-gray);
+            color: var(--ios-blue);
         }
 
-        .delete-btn-card {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--red);
-            color: white;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            margin-left: 8px;
+        .btn-danger-ios {
+            background: var(--ios-light-gray);
+            color: var(--ios-red);
         }
 
-        .add-playlist-btn {
+        .add-workout-btn {
             width: 100%;
             padding: 16px;
-            background: var(--card);
-            border: 2px dashed var(--primary);
+            background: var(--ios-card);
+            border: 2px dashed var(--ios-blue);
             border-radius: 12px;
-            color: var(--primary);
+            color: var(--ios-blue);
             font-size: 17px;
             font-weight: 600;
             cursor: pointer;
@@ -200,8 +169,15 @@
             gap: 8px;
         }
 
+        /* Workout Builder */
+        .builder-screen {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
         .form-group {
-            background: var(--card);
+            background: var(--ios-card);
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 12px;
@@ -210,7 +186,7 @@
         .form-label {
             font-size: 13px;
             font-weight: 600;
-            color: var(--text-secondary);
+            color: var(--ios-gray);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 8px;
@@ -221,40 +197,77 @@
             width: 100%;
             padding: 12px;
             border: none;
-            background: var(--background);
+            background: var(--ios-light-gray);
             border-radius: 8px;
             font-size: 17px;
             font-family: var(--sf-pro);
-            color: var(--text);
+            color: var(--ios-dark);
         }
 
         .form-input:focus {
-            outline: 2px solid var(--primary);
+            outline: none;
+            background: #E8E8ED;
         }
 
-        .color-picker {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 12px;
-            margin-top: 8px;
+        .toggle-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
         }
 
-        .color-option {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: 3px solid transparent;
+        .toggle-label {
+            font-size: 17px;
+            color: var(--ios-dark);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 51px;
+            height: 31px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
             cursor: pointer;
-            transition: all 0.2s;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #E9E9EA;
+            transition: 0.3s;
+            border-radius: 31px;
         }
 
-        .color-option.selected {
-            border-color: var(--text);
-            transform: scale(1.1);
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 27px;
+            width: 27px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
         }
 
-        .workout-item {
-            background: var(--background);
+        input:checked + .toggle-slider {
+            background-color: var(--ios-green);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        .exercise-item {
+            background: var(--ios-light-gray);
             border-radius: 8px;
             padding: 12px;
             margin-bottom: 8px;
@@ -263,105 +276,48 @@
             align-items: center;
         }
 
-        .workout-info {
+        .exercise-info {
             flex: 1;
         }
 
-        .workout-name {
+        .exercise-name {
             font-size: 17px;
             font-weight: 600;
+            color: var(--ios-dark);
             margin-bottom: 4px;
         }
 
-        .workout-details {
+        .exercise-details {
             font-size: 13px;
-            color: var(--text-secondary);
+            color: var(--ios-gray);
         }
 
-        .workout-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .icon-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
+        .delete-btn {
+            background: var(--ios-red);
+            color: white;
             border: none;
-            background: var(--card);
-            color: var(--primary);
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        .icon-btn.delete {
-            color: var(--red);
-        }
-
-        .setting-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 0.5px solid var(--border);
-        }
-
-        .setting-row:last-child {
-            border-bottom: none;
-        }
-
-        .setting-label {
-            font-size: 17px;
-        }
-
-        .setting-value {
-            font-size: 15px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            padding: 4px 8px;
-            border-radius: 6px;
-            background: var(--background);
-        }
-
-        .number-input-group {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 12px;
-            align-items: center;
-            background: var(--background);
-            border-radius: 8px;
-            padding: 8px;
-        }
-
-        .number-btn {
-            width: 40px;
-            height: 40px;
             border-radius: 50%;
-            border: none;
-            background: var(--card);
-            color: var(--primary);
-            font-size: 24px;
-            cursor: pointer;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .number-display {
-            text-align: center;
-            font-size: 20px;
+            cursor: pointer;
+            font-size: 16px;
             font-weight: 600;
         }
 
+        /* Workout Screen */
         .workout-screen {
             display: flex;
             flex-direction: column;
-            min-height: calc(100vh - 50px);
+            height: calc(100vh - 50px);
             padding: 16px;
+            padding-bottom: 20px;
         }
 
         .progress-section {
-            background: var(--card);
+            background: var(--ios-card);
             border-radius: 12px;
             padding: 12px 16px;
             margin-bottom: 12px;
@@ -377,35 +333,38 @@
         .progress-label {
             font-size: 13px;
             font-weight: 600;
-            color: var(--text-secondary);
+            color: var(--ios-gray);
         }
 
         .progress-percentage {
             font-size: 15px;
             font-weight: 600;
+            color: var(--ios-blue);
         }
 
         .progress-bar-container {
             height: 4px;
-            background: var(--background);
+            background: var(--ios-light-gray);
             border-radius: 2px;
             overflow: hidden;
         }
 
         .progress-bar {
             height: 100%;
+            background: var(--ios-blue);
             transition: width 0.3s ease;
             width: 0%;
         }
 
         .exercise-card {
-            background: var(--card);
+            background: var(--ios-card);
             border-radius: 12px;
             padding: 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            margin-bottom: 12px;
         }
 
         .exercise-header {
@@ -415,10 +374,11 @@
         .section-badge {
             display: inline-block;
             padding: 4px 12px;
-            background: var(--background);
+            background: var(--ios-light-gray);
             border-radius: 12px;
             font-size: 12px;
             font-weight: 600;
+            color: var(--ios-blue);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 12px;
@@ -427,22 +387,28 @@
         .exercise-title {
             font-size: 28px;
             font-weight: 700;
+            color: var(--ios-dark);
             margin-bottom: 8px;
             letter-spacing: -0.5px;
         }
 
         .exercise-subtitle {
             font-size: 17px;
-            color: var(--text-secondary);
+            color: var(--ios-gray);
             margin-bottom: 20px;
+        }
+
+        .timer-container {
+            text-align: center;
+            margin: 20px 0;
         }
 
         .timer-display {
             font-size: 72px;
             font-weight: 700;
+            color: var(--ios-dark);
             font-variant-numeric: tabular-nums;
             letter-spacing: -2px;
-            margin: 20px 0;
         }
 
         .rhythm-container {
@@ -461,24 +427,28 @@
             justify-content: center;
             font-size: 24px;
             font-weight: 700;
-            transition: all 0.3s ease;
-            background: var(--background);
-            color: var(--text-secondary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--ios-light-gray);
+            color: var(--ios-gray);
         }
 
         .rhythm-circle.up {
+            background: var(--ios-blue);
             color: white;
             transform: scale(1.1);
             box-shadow: 0 8px 24px rgba(0, 122, 255, 0.3);
         }
 
         .rhythm-circle.down {
+            background: var(--ios-light-gray);
+            color: var(--ios-gray);
             transform: scale(0.95);
         }
 
         .rep-counter {
             font-size: 17px;
             font-weight: 600;
+            color: var(--ios-blue);
             margin-top: 16px;
         }
 
@@ -486,7 +456,7 @@
             text-align: center;
             font-size: 15px;
             font-weight: 600;
-            color: var(--text-secondary);
+            color: var(--ios-gray);
             margin: 12px 0;
         }
 
@@ -494,6 +464,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
+            padding-top: 12px;
         }
 
         .control-buttons.single {
@@ -507,74 +478,36 @@
             font-size: 17px;
             font-weight: 600;
             cursor: pointer;
-            font-family: var(--sf-pro);
+            transition: all 0.2s;
+        }
+
+        .control-btn:active {
+            transform: scale(0.95);
         }
 
         .btn-start {
+            background: var(--ios-blue);
+            color: white;
             grid-column: 1 / -1;
         }
 
         .btn-pause {
-            background: var(--orange);
+            background: var(--ios-orange);
             color: white;
         }
 
         .btn-skip {
-            background: var(--background);
-            color: var(--primary);
+            background: var(--ios-light-gray);
+            color: var(--ios-blue);
         }
 
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--overlay);
-            display: flex;
-            align-items: flex-end;
-            z-index: 2000;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal {
-            background: var(--card);
-            border-radius: 12px 12px 0 0;
-            width: 100%;
-            max-width: 428px;
-            margin: 0 auto;
-            max-height: 80vh;
-            overflow-y: auto;
-            animation: slideUp 0.3s ease;
-        }
-
-        .modal-header {
-            padding: 16px 20px;
-            border-bottom: 0.5px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            background: var(--card);
-            z-index: 1;
-        }
-
-        .modal-title {
-            font-size: 17px;
-            font-weight: 600;
-        }
-
-        .modal-content {
-            padding: 20px;
-        }
-
+        /* Completion Screen */
         .completion-screen {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: calc(100vh - 50px);
+            height: calc(100vh - 50px);
             padding: 20px;
             text-align: center;
         }
@@ -588,18 +521,19 @@
         .completion-title {
             font-size: 32px;
             font-weight: 700;
+            color: var(--ios-dark);
             margin-bottom: 12px;
             letter-spacing: -0.5px;
         }
 
         .completion-message {
             font-size: 17px;
-            color: var(--text-secondary);
+            color: var(--ios-gray);
             margin-bottom: 24px;
         }
 
         .stats-card {
-            background: var(--card);
+            background: var(--ios-card);
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
@@ -611,7 +545,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 0;
-            border-bottom: 0.5px solid var(--border);
+            border-bottom: 0.5px solid var(--ios-light-gray);
         }
 
         .stat-row:last-child {
@@ -620,35 +554,54 @@
 
         .stat-label {
             font-size: 17px;
+            color: var(--ios-dark);
         }
 
         .stat-value {
             font-size: 17px;
             font-weight: 600;
+            color: var(--ios-blue);
         }
 
-        .theme-toggle-container {
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
             display: flex;
-            gap: 8px;
+            align-items: flex-end;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
         }
 
-        .theme-btn {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            background: var(--background);
-            color: var(--text);
-            font-size: 15px;
+        .modal {
+            background: var(--ios-card);
+            border-radius: 12px 12px 0 0;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-header {
+            padding: 16px 20px;
+            border-bottom: 0.5px solid var(--ios-light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 17px;
             font-weight: 600;
-            cursor: pointer;
-            font-family: var(--sf-pro);
+            color: var(--ios-dark);
         }
 
-        .theme-btn.active {
-            border-color: var(--primary);
-            background: var(--primary);
-            color: white;
+        .modal-content {
+            padding: 20px;
         }
 
         @keyframes fadeIn {
@@ -669,76 +622,100 @@
         .hidden {
             display: none !important;
         }
+
+        /* iOS-style number input */
+        .number-input-group {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 12px;
+            align-items: center;
+            background: var(--ios-light-gray);
+            border-radius: 8px;
+            padding: 8px;
+        }
+
+        .number-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: var(--ios-card);
+            color: var(--ios-blue);
+            font-size: 24px;
+            font-weight: 400;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .number-btn:active {
+            background: #E8E8ED;
+        }
+
+        .number-display {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--ios-dark);
+        }
     </style>
 </head>
-<body data-theme="light">
+<body>
+    <!-- Header -->
     <div class="header">
         <div class="header-content">
-            <button class="header-button invisible" id="backBtn" onclick="goBack()">← Back</button>
+            <button class="header-button" id="backBtn" onclick="goBack()">← Back</button>
             <h1 class="header-title" id="headerTitle">Workouts</h1>
-            <button class="header-button" id="rightBtn" onclick="handleRightButton()">Settings</button>
+            <button class="header-button" id="editBtn" onclick="toggleEdit()">Edit</button>
         </div>
     </div>
 
     <div class="container">
         <!-- Home Screen -->
-        <div id="homeScreen" class="screen">
-            <div id="playlistsList"></div>
-            <button class="add-playlist-btn" onclick="showPlaylistBuilder()">
-                + Create Workout Playlist
+        <div id="homeScreen" class="home-screen">
+            <div id="workoutsList"></div>
+            <button class="add-workout-btn" onclick="showBuilder()">
+                <span>+</span> Create Custom Workout
             </button>
         </div>
 
-        <!-- Playlist Builder -->
-        <div id="playlistBuilderScreen" class="screen hidden">
+        <!-- Workout Builder Screen -->
+        <div id="builderScreen" class="builder-screen hidden">
             <div class="form-group">
-                <label class="form-label">Playlist Name</label>
-                <input type="text" class="form-input" id="playlistName" placeholder="My Workout Playlist">
+                <label class="form-label">Workout Name</label>
+                <input type="text" class="form-input" id="workoutName" placeholder="My Custom Workout">
             </div>
 
             <div class="form-group">
-                <label class="form-label">Color</label>
-                <div class="color-picker" id="colorPicker"></div>
+                <label class="form-label">Settings</label>
+                <div class="toggle-group">
+                    <span class="toggle-label">Timer</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="timerToggle" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-group">
+                    <span class="toggle-label">Rhythm Guide</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="rhythmToggle" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
             </div>
 
             <div class="form-group">
-                <label class="form-label">Workouts</label>
-                <div id="workoutsList"></div>
-                <button class="btn-ios btn-primary" onclick="showWorkoutModal()" style="margin-top: 12px; width: 100%;">
-                    + Add Workout
+                <label class="form-label">Exercises</label>
+                <div id="exercisesList"></div>
+                <button class="btn-ios btn-primary-ios" onclick="showExerciseModal()" style="margin-top: 12px; width: 100%;">
+                    + Add Exercise
                 </button>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Customization</label>
-                <div class="setting-row" onclick="showTimerOptions()">
-                    <span class="setting-label">Timer</span>
-                    <span class="setting-value" id="timerValue">Auto</span>
-                </div>
-                <div class="setting-row" onclick="showRhythmOptions()">
-                    <span class="setting-label">Rhythm Guide</span>
-                    <span class="setting-value" id="rhythmValue">Auto</span>
-                </div>
-                <div class="setting-row" onclick="showPaceOptions()">
-                    <span class="setting-label">Pace (sec/rep)</span>
-                    <span class="setting-value" id="paceValue">Auto (3s)</span>
-                </div>
-            </div>
-
-            <button class="btn-ios btn-primary" onclick="savePlaylist()" style="width: 100%;">
-                Save Playlist
+            <button class="btn-ios btn-primary-ios" onclick="saveWorkout()" style="margin-top: 12px; width: 100%;">
+                Save Workout
             </button>
-        </div>
-
-        <!-- Settings -->
-        <div id="settingsScreen" class="screen hidden">
-            <div class="form-group">
-                <label class="form-label">Theme</label>
-                <div class="theme-toggle-container">
-                    <button class="theme-btn active" id="lightThemeBtn" onclick="setTheme('light')">☀️ Light</button>
-                    <button class="theme-btn" id="darkThemeBtn" onclick="setTheme('dark')">🌙 Dark</button>
-                </div>
-            </div>
         </div>
 
         <!-- Workout Screen -->
@@ -755,12 +732,12 @@
 
             <div class="exercise-card">
                 <div class="exercise-header">
-                    <div class="section-badge" id="sectionBadge">Set 1</div>
-                    <h2 class="exercise-title" id="exerciseTitle">Push-ups</h2>
+                    <div class="section-badge" id="sectionBadge">Warm-up</div>
+                    <h2 class="exercise-title" id="exerciseTitle">Bodyweight Squats</h2>
                     <p class="exercise-subtitle" id="exerciseSubtitle">15 reps</p>
                 </div>
 
-                <div style="text-align: center;">
+                <div class="timer-container">
                     <div class="timer-display" id="timerDisplay">0:45</div>
                     <div class="motivation-text" id="motivationText">💪 You've got this!</div>
                 </div>
@@ -771,16 +748,16 @@
                 </div>
 
                 <div class="control-buttons single" id="controlButtons">
-                    <button class="control-btn btn-start" onclick="startExercise()">Start</button>
+                    <button class="control-btn btn-start" id="startBtn" onclick="startExercise()">Start</button>
                 </div>
             </div>
         </div>
 
-        <!-- Completion -->
+        <!-- Completion Screen -->
         <div id="completionScreen" class="completion-screen hidden">
             <div class="completion-icon">🎉</div>
             <h2 class="completion-title">Workout Complete!</h2>
-            <p class="completion-message">Amazing work!</p>
+            <p class="completion-message">Amazing work! You crushed it!</p>
             
             <div class="stats-card">
                 <div class="stat-row">
@@ -797,37 +774,28 @@
                 </div>
             </div>
 
-            <button class="btn-ios btn-primary" onclick="goHome()" style="width: 100%;">Done</button>
+            <button class="btn-ios btn-primary-ios" onclick="goHome()" style="width: 100%;">Done</button>
         </div>
     </div>
 
-    <!-- Modals -->
-    <div id="workoutModal" class="modal-overlay hidden" onclick="closeModal('workoutModal', event)">
+    <!-- Exercise Modal -->
+    <div id="exerciseModal" class="modal-overlay hidden" onclick="closeExerciseModal(event)">
         <div class="modal" onclick="event.stopPropagation()">
             <div class="modal-header">
-                <h3 class="modal-title" id="workoutModalTitle">Add Workout</h3>
-                <button class="header-button" onclick="closeModal('workoutModal')">Done</button>
+                <h3 class="modal-title">Add Exercise</h3>
+                <button class="header-button" onclick="closeExerciseModal()">Cancel</button>
             </div>
             <div class="modal-content">
                 <div class="form-group">
-                    <label class="form-label">Workout Name</label>
-                    <input type="text" class="form-input" id="workoutNameInput" placeholder="Push-ups">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Sets</label>
-                    <div class="number-input-group">
-                        <button class="number-btn" onclick="adjustNumber('sets', -1)">−</button>
-                        <div class="number-display" id="setsDisplay">3</div>
-                        <button class="number-btn" onclick="adjustNumber('sets', 1)">+</button>
-                    </div>
+                    <label class="form-label">Exercise Name</label>
+                    <input type="text" class="form-input" id="exerciseNameInput" placeholder="Push-ups">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Type</label>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                        <button class="btn-ios btn-primary" id="repsTypeBtn" onclick="setWorkoutType('reps')">Reps</button>
-                        <button class="btn-ios btn-secondary" id="durationTypeBtn" onclick="setWorkoutType('duration')">Duration</button>
+                        <button class="btn-ios btn-primary-ios" id="repsTypeBtn" onclick="setExerciseType('reps')">Reps</button>
+                        <button class="btn-ios btn-secondary-ios" id="durationTypeBtn" onclick="setExerciseType('duration')">Duration</button>
                     </div>
                 </div>
 
@@ -849,216 +817,203 @@
                     </div>
                 </div>
 
-                <button class="btn-ios btn-primary" onclick="saveWorkout()" style="width: 100%;">
-                    Save Workout
+                <div class="form-group" id="setsGroup">
+                    <label class="form-label">Sets</label>
+                    <div class="number-input-group">
+                        <button class="number-btn" onclick="adjustNumber('sets', -1)">−</button>
+                        <div class="number-display" id="setsDisplay">3</div>
+                        <button class="number-btn" onclick="adjustNumber('sets', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group" id="paceGroup">
+                    <label class="form-label">Pace (seconds per rep)</label>
+                    <div class="number-input-group">
+                        <button class="number-btn" onclick="adjustNumber('pace', -1)">−</button>
+                        <div class="number-display" id="paceDisplay">3</div>
+                        <button class="number-btn" onclick="adjustNumber('pace', 1)">+</button>
+                    </div>
+                </div>
+
+                <button class="btn-ios btn-primary-ios" onclick="addExercise()" style="width: 100%; margin-top: 12px;">
+                    Add Exercise
                 </button>
             </div>
         </div>
     </div>
 
-    <div id="optionsModal" class="modal-overlay hidden" onclick="closeModal('optionsModal', event)">
-        <div class="modal" onclick="event.stopPropagation()">
-            <div class="modal-header">
-                <h3 class="modal-title" id="optionsModalTitle">Options</h3>
-                <button class="header-button" onclick="closeModal('optionsModal')">Done</button>
-            </div>
-            <div class="modal-content" id="optionsModalContent"></div>
-        </div>
-    </div>
-
     <script>
-        const COLORS = [
-            '#007AFF', '#34C759', '#FF9500', '#FF3B30', '#AF52DE', '#FF2D55',
-            '#FFCC00', '#5AC8FA', '#5856D6', '#32ADE6', '#00C7BE', '#A2845E'
-        ];
+        // Default workout data
+        const defaultWorkout = {
+            id: 'default',
+            name: 'Full-Body Muscle Routine',
+            timerEnabled: true,
+            rhythmEnabled: true,
+            exercises: [
+                // Warm-up
+                { section: "Warm-up", name: "Bodyweight Squats", reps: 15, pace: 3, type: "reps" },
+                { section: "Warm-up", name: "Arm Circles", duration: 30, type: "duration" },
+                { section: "Warm-up", name: "March in Place / Jumping Jacks", duration: 60, type: "duration" },
+                { section: "Warm-up", name: "Hip Circles", duration: 30, type: "duration" },
+                
+                // Main Exercises - Set 1
+                { section: "Main Workout - Set 1", name: "Squats", reps: 15, pace: 3, sets: 3, currentSet: 1, type: "reps" },
+                { section: "Main Workout - Set 1", name: "Push-ups", reps: 12, pace: 3, sets: 3, currentSet: 1, type: "reps" },
+                { section: "Main Workout - Set 1", name: "Glute Bridges", reps: 15, pace: 3, sets: 3, currentSet: 1, type: "reps" },
+                { section: "Main Workout - Set 1", name: "Chair Dips", reps: 12, pace: 3, sets: 3, currentSet: 1, type: "reps" },
+                { section: "Main Workout - Set 1", name: "Reverse Lunges", reps: 10, pace: 3, sets: 3, currentSet: 1, type: "reps" },
+                { section: "Main Workout - Set 1", name: "Plank", duration: 30, sets: 3, currentSet: 1, type: "duration" },
+                
+                // Set 2
+                { section: "Main Workout - Set 2", name: "Squats", reps: 15, pace: 3, sets: 3, currentSet: 2, type: "reps" },
+                { section: "Main Workout - Set 2", name: "Push-ups", reps: 12, pace: 3, sets: 3, currentSet: 2, type: "reps" },
+                { section: "Main Workout - Set 2", name: "Glute Bridges", reps: 15, pace: 3, sets: 3, currentSet: 2, type: "reps" },
+                { section: "Main Workout - Set 2", name: "Chair Dips", reps: 12, pace: 3, sets: 3, currentSet: 2, type: "reps" },
+                { section: "Main Workout - Set 2", name: "Reverse Lunges", reps: 10, pace: 3, sets: 3, currentSet: 2, type: "reps" },
+                { section: "Main Workout - Set 2", name: "Plank", duration: 30, sets: 3, currentSet: 2, type: "duration" },
+                
+                // Set 3
+                { section: "Main Workout - Set 3", name: "Squats", reps: 15, pace: 3, sets: 3, currentSet: 3, type: "reps" },
+                { section: "Main Workout - Set 3", name: "Push-ups", reps: 12, pace: 3, sets: 3, currentSet: 3, type: "reps" },
+                { section: "Main Workout - Set 3", name: "Glute Bridges", reps: 15, pace: 3, sets: 3, currentSet: 3, type: "reps" },
+                { section: "Main Workout - Set 3", name: "Chair Dips", reps: 12, pace: 3, sets: 3, currentSet: 3, type: "reps" },
+                { section: "Main Workout - Set 3", name: "Reverse Lunges", reps: 10, pace: 3, sets: 3, currentSet: 3, type: "reps" },
+                { section: "Main Workout - Set 3", name: "Plank", duration: 30, sets: 3, currentSet: 3, type: "duration" },
+                
+                // Cool down
+                { section: "Cool Down", name: "Quad Stretch", duration: 30, type: "duration" },
+                { section: "Cool Down", name: "Quad Stretch (Other Leg)", duration: 30, type: "duration" },
+                { section: "Cool Down", name: "Hamstring Stretch", duration: 30, type: "duration" },
+                { section: "Cool Down", name: "Hamstring Stretch (Other Leg)", duration: 30, type: "duration" },
+                { section: "Cool Down", name: "Glute Stretch", duration: 30, type: "duration" },
+                { section: "Cool Down", name: "Glute Stretch (Other Leg)", duration: 30, type: "duration" },
+                { section: "Cool Down", name: "Chest & Shoulder Stretch", duration: 30, type: "duration" },
+                { section: "Cool Down", name: "Deep Breathing", duration: 60, type: "duration" }
+            ]
+        };
 
-        const motivationalMessages = [
-            "💪 You've got this!", "🔥 Keep pushing!", "⚡ Feel the burn!",
-            "🌟 Almost there!", "💯 Great form!", "🚀 Strong work!",
-            "✨ Amazing effort!", "🎯 Stay focused!", "💥 Power through!", "🏆 You're crushing it!"
-        ];
-
-        let playlists = [];
-        let currentPlaylist = null;
-        let currentWorkoutIndex = 0;
-        let currentScreen = 'home';
-        let editMode = false;
-        let editingPlaylistIndex = -1;
-        let editingWorkoutIndex = -1;
-
-        let builderWorkouts = [];
-        let builderSettings = { color: COLORS[0], timer: 'auto', rhythm: 'auto', pace: 'auto' };
-        let workoutNumbers = { sets: 3, reps: 10, duration: 30 };
-        let workoutType = 'reps';
-
+        // State management
+        let workouts = [];
+        let currentWorkout = null;
+        let currentExerciseIndex = 0;
         let timer = null;
         let timeRemaining = 0;
         let currentRep = 0;
         let isUp = false;
         let isPaused = false;
+        let editMode = false;
+        let currentScreen = 'home';
+        let builderExercises = [];
+        let exerciseType = 'reps';
+        let exerciseNumbers = { reps: 10, duration: 30, sets: 3, pace: 3 };
 
+        const motivationalMessages = [
+            "💪 You've got this!",
+            "🔥 Keep pushing!",
+            "⚡ Feel the burn!",
+            "🌟 Almost there!",
+            "💯 Great form!",
+            "🚀 Strong work!",
+            "✨ Amazing effort!",
+            "🎯 Stay focused!",
+            "💥 Power through!",
+            "🏆 You're crushing it!"
+        ];
+
+        // Initialize
         function init() {
-            loadPlaylists();
-            loadTheme();
-            renderColorPicker();
-            renderPlaylists();
+            loadWorkouts();
+            renderWorkoutsList();
             updateHeader();
         }
 
-        function loadTheme() {
-            const theme = localStorage.getItem('theme') || 'light';
-            setTheme(theme);
+        // Load workouts from localStorage
+        function loadWorkouts() {
+            const saved = localStorage.getItem('workouts');
+            if (saved) {
+                workouts = JSON.parse(saved);
+            } else {
+                workouts = [defaultWorkout];
+                saveWorkouts();
+            }
         }
 
-        function setTheme(theme) {
-            document.body.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            document.getElementById('lightThemeBtn').classList.toggle('active', theme === 'light');
-            document.getElementById('darkThemeBtn').classList.toggle('active', theme === 'dark');
+        // Save workouts to localStorage
+        function saveWorkouts() {
+            localStorage.setItem('workouts', JSON.stringify(workouts));
         }
 
-        function loadPlaylists() {
-            const saved = localStorage.getItem('playlists');
-            playlists = saved ? JSON.parse(saved) : [{
-                id: Date.now(),
-                name: 'Full-Body Workout',
-                color: COLORS[0],
-                settings: { timer: 'auto', rhythm: 'auto', pace: 'auto' },
-                workouts: [
-                    { name: 'Squats', sets: 3, type: 'reps', reps: 15 },
-                    { name: 'Push-ups', sets: 3, type: 'reps', reps: 12 },
-                    { name: 'Plank', sets: 3, type: 'duration', duration: 30 }
-                ]
-            }];
-            if (!saved) savePlaylists();
-        }
-
-        function savePlaylists() {
-            localStorage.setItem('playlists', JSON.stringify(playlists));
-        }
-
-        function renderPlaylists() {
-            const list = document.getElementById('playlistsList');
+        // Render workouts list
+        function renderWorkoutsList() {
+            const list = document.getElementById('workoutsList');
             list.innerHTML = '';
-
-            playlists.forEach((playlist, index) => {
-                const totalTime = calculatePlaylistTime(playlist);
-                const totalExercises = playlist.workouts.reduce((sum, w) => sum + w.sets, 0);
-
+            
+            workouts.forEach((workout, index) => {
+                const totalTime = calculateWorkoutTime(workout);
                 const card = document.createElement('div');
-                card.className = 'playlist-card';
+                card.className = 'workout-card';
                 card.innerHTML = `
-                    <div class="playlist-header">
-                        <div>
-                            <div class="playlist-title">${playlist.name}</div>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <div class="playlist-color" style="background: ${playlist.color};"></div>
-                            ${editMode ? `<button class="delete-btn-card" onclick="deletePlaylist(${index}, event)">−</button>` : ''}
-                        </div>
+                    <div class="workout-card-header">
+                        <div class="workout-card-title">${workout.name}</div>
                     </div>
-                    <div class="playlist-info">
-                        ${totalExercises} exercises · ~${totalTime} min
+                    <div class="workout-card-info">
+                        ${workout.exercises.length} exercises · ~${totalTime} min
                     </div>
-                    ${!editMode ? `
-                        <div class="playlist-actions">
-                            <button class="btn-ios btn-primary" onclick="startPlaylist(${index})">Start</button>
-                            <button class="btn-ios btn-secondary" onclick="editPlaylist(${index})">Edit</button>
-                        </div>
-                    ` : ''}
+                    <div class="workout-card-actions">
+                        <button class="btn-ios btn-primary-ios" onclick="startWorkout(${index})">Start</button>
+                        ${workout.id !== 'default' ? `
+                            <button class="btn-ios btn-secondary-ios" onclick="editWorkout(${index})">Edit</button>
+                            <button class="btn-ios btn-danger-ios" onclick="deleteWorkout(${index})">Delete</button>
+                        ` : ''}
+                    </div>
                 `;
                 list.appendChild(card);
             });
         }
 
-        function calculatePlaylistTime(playlist) {
+        // Calculate workout time
+        function calculateWorkoutTime(workout) {
             let total = 0;
-            const pace = playlist.settings.pace === 'auto' ? 3 : parseInt(playlist.settings.pace) || 0;
-            
-            playlist.workouts.forEach(workout => {
-                for (let i = 0; i < workout.sets; i++) {
-                    if (workout.type === 'reps' && pace > 0) {
-                        total += workout.reps * pace;
-                    } else if (workout.type === 'duration') {
-                        total += workout.duration;
-                    }
+            workout.exercises.forEach(ex => {
+                if (ex.type === 'reps') {
+                    total += ex.reps * (ex.pace || 3);
+                } else {
+                    total += ex.duration;
                 }
             });
-            
             return Math.round(total / 60);
         }
 
-        function deletePlaylist(index, event) {
-            event.stopPropagation();
-            if (confirm('Delete this playlist?')) {
-                playlists.splice(index, 1);
-                savePlaylists();
-                renderPlaylists();
-            }
-        }
-
-        function renderColorPicker() {
-            const picker = document.getElementById('colorPicker');
-            picker.innerHTML = '';
-            
-            COLORS.forEach(color => {
-                const option = document.createElement('div');
-                option.className = 'color-option' + (color === builderSettings.color ? ' selected' : '');
-                option.style.background = color;
-                option.onclick = () => {
-                    builderSettings.color = color;
-                    renderColorPicker();
-                };
-                picker.appendChild(option);
-            });
-        }
-
+        // Navigation
         function updateHeader() {
             const backBtn = document.getElementById('backBtn');
-            const rightBtn = document.getElementById('rightBtn');
-            const title = document.getElementById('headerTitle');
-
-            backBtn.classList.toggle('invisible', currentScreen === 'home' || currentScreen === 'completion');
-
+            const editBtn = document.getElementById('editBtn');
+            const headerTitle = document.getElementById('headerTitle');
+            
             if (currentScreen === 'home') {
-                rightBtn.textContent = editMode ? 'Done' : 'Settings';
-                rightBtn.classList.remove('invisible');
-                title.textContent = 'Workouts';
-            } else if (currentScreen === 'playlistBuilder') {
-                rightBtn.classList.add('invisible');
-                title.textContent = editingPlaylistIndex >= 0 ? 'Edit Playlist' : 'New Playlist';
-            } else if (currentScreen === 'settings') {
-                rightBtn.classList.add('invisible');
-                title.textContent = 'Settings';
+                backBtn.style.visibility = 'hidden';
+                editBtn.style.visibility = 'hidden';
+                headerTitle.textContent = 'Workouts';
+            } else if (currentScreen === 'builder') {
+                backBtn.style.visibility = 'visible';
+                editBtn.style.visibility = 'hidden';
+                headerTitle.textContent = 'Create Workout';
             } else if (currentScreen === 'workout') {
-                rightBtn.classList.add('invisible');
-                title.textContent = currentPlaylist.name;
+                backBtn.style.visibility = 'visible';
+                editBtn.style.visibility = 'hidden';
+                headerTitle.textContent = currentWorkout.name;
             } else if (currentScreen === 'completion') {
-                rightBtn.classList.add('invisible');
-                title.textContent = 'Complete';
+                backBtn.style.visibility = 'hidden';
+                editBtn.style.visibility = 'hidden';
+                headerTitle.textContent = 'Complete';
             }
-        }
-
-        function handleRightButton() {
-            if (currentScreen === 'home') {
-                if (editMode) {
-                    toggleEditMode();
-                } else {
-                    showScreen('settings');
-                }
-            }
-        }
-
-        function toggleEditMode() {
-            editMode = !editMode;
-            renderPlaylists();
-            updateHeader();
         }
 
         function showScreen(screen) {
-            ['homeScreen', 'playlistBuilderScreen', 'settingsScreen', 'workoutScreen', 'completionScreen'].forEach(s => {
-                document.getElementById(s).classList.add('hidden');
-            });
+            document.getElementById('homeScreen').classList.add('hidden');
+            document.getElementById('builderScreen').classList.add('hidden');
+            document.getElementById('workoutScreen').classList.add('hidden');
+            document.getElementById('completionScreen').classList.add('hidden');
             
             currentScreen = screen;
             document.getElementById(screen + 'Screen').classList.remove('hidden');
@@ -1066,324 +1021,234 @@
         }
 
         function goBack() {
-            goHome();
+            if (currentScreen === 'builder' || currentScreen === 'workout') {
+                goHome();
+            }
         }
 
         function goHome() {
             if (timer) clearInterval(timer);
-            editMode = false;
             showScreen('home');
-            renderPlaylists();
+            renderWorkoutsList();
         }
 
-        function showPlaylistBuilder() {
-            editingPlaylistIndex = -1;
-            builderWorkouts = [];
-            builderSettings = { color: COLORS[0], timer: 'auto', rhythm: 'auto', pace: 'auto' };
-            document.getElementById('playlistName').value = '';
-            renderColorPicker();
-            renderBuilderWorkouts();
-            updateSettingsDisplay();
-            showScreen('playlistBuilder');
+        function toggleEdit() {
+            editMode = !editMode;
+            document.getElementById('editBtn').textContent = editMode ? 'Done' : 'Edit';
         }
 
-        function editPlaylist(index) {
-            editingPlaylistIndex = index;
-            const playlist = playlists[index];
-            
-            builderWorkouts = JSON.parse(JSON.stringify(playlist.workouts));
-            builderSettings = { ...playlist.settings };
-            document.getElementById('playlistName').value = playlist.name;
-            
-            renderColorPicker();
-            renderBuilderWorkouts();
-            updateSettingsDisplay();
-            showScreen('playlistBuilder');
+        // Workout Builder
+        function showBuilder() {
+            builderExercises = [];
+            document.getElementById('workoutName').value = '';
+            document.getElementById('timerToggle').checked = true;
+            document.getElementById('rhythmToggle').checked = true;
+            renderBuilderExercises();
+            showScreen('builder');
         }
 
-        function renderBuilderWorkouts() {
-            const list = document.getElementById('workoutsList');
+        function editWorkout(index) {
+            const workout = workouts[index];
+            builderExercises = [...workout.exercises];
+            document.getElementById('workoutName').value = workout.name;
+            document.getElementById('timerToggle').checked = workout.timerEnabled;
+            document.getElementById('rhythmToggle').checked = workout.rhythmEnabled;
+            renderBuilderExercises();
+            showScreen('builder');
+        }
+
+        function renderBuilderExercises() {
+            const list = document.getElementById('exercisesList');
             list.innerHTML = '';
-
-            builderWorkouts.forEach((workout, index) => {
-                const details = workout.type === 'reps' 
-                    ? `${workout.sets} sets × ${workout.reps} reps`
-                    : `${workout.sets} sets × ${workout.duration}s`;
-
+            
+            builderExercises.forEach((ex, index) => {
                 const item = document.createElement('div');
-                item.className = 'workout-item';
+                item.className = 'exercise-item';
                 item.innerHTML = `
-                    <div class="workout-info">
-                        <div class="workout-name">${workout.name}</div>
-                        <div class="workout-details">${details}</div>
+                    <div class="exercise-info">
+                        <div class="exercise-name">${ex.name}</div>
+                        <div class="exercise-details">
+                            ${ex.type === 'reps' ? `${ex.reps} reps${ex.sets ? ` × ${ex.sets} sets` : ''}` : `${ex.duration}s${ex.sets ? ` × ${ex.sets} sets` : ''}`}
+                        </div>
                     </div>
-                    <div class="workout-actions">
-                        <button class="icon-btn" onclick="editWorkoutInBuilder(${index})">✏️</button>
-                        <button class="icon-btn delete" onclick="removeWorkout(${index})">−</button>
-                    </div>
+                    <button class="delete-btn" onclick="removeExercise(${index})">−</button>
                 `;
                 list.appendChild(item);
             });
         }
 
-        function removeWorkout(index) {
-            builderWorkouts.splice(index, 1);
-            renderBuilderWorkouts();
+        function removeExercise(index) {
+            builderExercises.splice(index, 1);
+            renderBuilderExercises();
         }
 
-        function editWorkoutInBuilder(index) {
-            editingWorkoutIndex = index;
-            const workout = builderWorkouts[index];
-            
-            document.getElementById('workoutNameInput').value = workout.name;
-            workoutNumbers.sets = workout.sets;
-            workoutNumbers.reps = workout.reps || 10;
-            workoutNumbers.duration = workout.duration || 30;
-            workoutType = workout.type;
-            
+        // Exercise Modal
+        function showExerciseModal() {
+            document.getElementById('exerciseModal').classList.remove('hidden');
+            document.getElementById('exerciseNameInput').value = '';
+            setExerciseType('reps');
+            exerciseNumbers = { reps: 10, duration: 30, sets: 3, pace: 3 };
             updateNumberDisplays();
-            setWorkoutType(workoutType);
-            
-            document.getElementById('workoutModalTitle').textContent = 'Edit Workout';
-            document.getElementById('workoutModal').classList.remove('hidden');
         }
 
-        function showWorkoutModal() {
-            editingWorkoutIndex = -1;
-            document.getElementById('workoutNameInput').value = '';
-            workoutNumbers = { sets: 3, reps: 10, duration: 30 };
-            workoutType = 'reps';
-            updateNumberDisplays();
-            setWorkoutType('reps');
-            document.getElementById('workoutModalTitle').textContent = 'Add Workout';
-            document.getElementById('workoutModal').classList.remove('hidden');
+        function closeExerciseModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('exerciseModal').classList.add('hidden');
         }
 
-        function setWorkoutType(type) {
-            workoutType = type;
+        function setExerciseType(type) {
+            exerciseType = type;
             
-            document.getElementById('repsTypeBtn').className = type === 'reps' ? 'btn-ios btn-primary' : 'btn-ios btn-secondary';
-            document.getElementById('durationTypeBtn').className = type === 'duration' ? 'btn-ios btn-primary' : 'btn-ios btn-secondary';
+            document.getElementById('repsTypeBtn').className = type === 'reps' ? 'btn-ios btn-primary-ios' : 'btn-ios btn-secondary-ios';
+            document.getElementById('durationTypeBtn').className = type === 'duration' ? 'btn-ios btn-primary-ios' : 'btn-ios btn-secondary-ios';
             
             document.getElementById('repsGroup').classList.toggle('hidden', type !== 'reps');
             document.getElementById('durationGroup').classList.toggle('hidden', type !== 'duration');
+            document.getElementById('paceGroup').classList.toggle('hidden', type !== 'reps');
         }
 
         function adjustNumber(field, delta) {
-            if (field === 'duration') {
-                workoutNumbers[field] = Math.max(5, workoutNumbers[field] + delta);
-            } else {
-                workoutNumbers[field] = Math.max(1, workoutNumbers[field] + delta);
-            }
+            exerciseNumbers[field] = Math.max(1, exerciseNumbers[field] + delta);
             updateNumberDisplays();
         }
 
         function updateNumberDisplays() {
-            document.getElementById('setsDisplay').textContent = workoutNumbers.sets;
-            document.getElementById('repsDisplay').textContent = workoutNumbers.reps;
-            document.getElementById('durationDisplay').textContent = workoutNumbers.duration;
+            document.getElementById('repsDisplay').textContent = exerciseNumbers.reps;
+            document.getElementById('durationDisplay').textContent = exerciseNumbers.duration;
+            document.getElementById('setsDisplay').textContent = exerciseNumbers.sets;
+            document.getElementById('paceDisplay').textContent = exerciseNumbers.pace;
+        }
+
+        function addExercise() {
+            const name = document.getElementById('exerciseNameInput').value.trim();
+            if (!name) {
+                alert('Please enter an exercise name');
+                return;
+            }
+
+            const sets = exerciseNumbers.sets;
+            const baseExercise = {
+                section: "Workout",
+                name: name,
+                type: exerciseType
+            };
+
+            if (exerciseType === 'reps') {
+                baseExercise.reps = exerciseNumbers.reps;
+                baseExercise.pace = exerciseNumbers.pace;
+            } else {
+                baseExercise.duration = exerciseNumbers.duration;
+            }
+
+            // Add multiple sets if needed
+            if (sets > 1) {
+                for (let i = 1; i <= sets; i++) {
+                    builderExercises.push({
+                        ...baseExercise,
+                        sets: sets,
+                        currentSet: i,
+                        section: `Set ${i}`
+                    });
+                }
+            } else {
+                builderExercises.push(baseExercise);
+            }
+
+            renderBuilderExercises();
+            closeExerciseModal();
         }
 
         function saveWorkout() {
-            const name = document.getElementById('workoutNameInput').value.trim();
-            if (!name) return alert('Please enter a workout name');
+            const name = document.getElementById('workoutName').value.trim();
+            if (!name) {
+                alert('Please enter a workout name');
+                return;
+            }
+
+            if (builderExercises.length === 0) {
+                alert('Please add at least one exercise');
+                return;
+            }
 
             const workout = {
+                id: Date.now().toString(),
                 name: name,
-                sets: workoutNumbers.sets,
-                type: workoutType
+                timerEnabled: document.getElementById('timerToggle').checked,
+                rhythmEnabled: document.getElementById('rhythmToggle').checked,
+                exercises: builderExercises
             };
 
-            if (workoutType === 'reps') {
-                workout.reps = workoutNumbers.reps;
-            } else {
-                workout.duration = workoutNumbers.duration;
-            }
-
-            if (editingWorkoutIndex >= 0) {
-                builderWorkouts[editingWorkoutIndex] = workout;
-            } else {
-                builderWorkouts.push(workout);
-            }
-
-            renderBuilderWorkouts();
-            closeModal('workoutModal');
-        }
-
-        function updateSettingsDisplay() {
-            const timerText = builderSettings.timer === 'off' ? 'Off' : 'Auto';
-            const rhythmText = builderSettings.rhythm === 'off' ? 'Off' : 'Auto';
-            const paceText = builderSettings.pace === 'auto' ? 'Auto (3s)' : 
-                            builderSettings.pace === 'off' ? 'Off' : 
-                            `${builderSettings.pace}s`;
-            
-            document.getElementById('timerValue').textContent = timerText;
-            document.getElementById('rhythmValue').textContent = rhythmText;
-            document.getElementById('paceValue').textContent = paceText;
-        }
-
-        function showTimerOptions() {
-            showOptionsModal('Timer', [
-                { label: 'Auto', value: 'auto' },
-                { label: 'Off', value: 'off' }
-            ], builderSettings.timer, (value) => {
-                builderSettings.timer = value;
-                updateSettingsDisplay();
-            });
-        }
-
-        function showRhythmOptions() {
-            showOptionsModal('Rhythm Guide', [
-                { label: 'Auto', value: 'auto' },
-                { label: 'Off', value: 'off' }
-            ], builderSettings.rhythm, (value) => {
-                builderSettings.rhythm = value;
-                updateSettingsDisplay();
-            });
-        }
-
-        function showPaceOptions() {
-            showOptionsModal('Pace (sec/rep)', [
-                { label: 'Auto (3 seconds)', value: 'auto' },
-                { label: '2 seconds', value: '2' },
-                { label: '3 seconds', value: '3' },
-                { label: '4 seconds', value: '4' },
-                { label: '5 seconds', value: '5' },
-                { label: 'Off (Manual)', value: 'off' }
-            ], builderSettings.pace, (value) => {
-                builderSettings.pace = value;
-                updateSettingsDisplay();
-            });
-        }
-
-        function showOptionsModal(title, options, current, callback) {
-            document.getElementById('optionsModalTitle').textContent = title;
-            
-            const content = document.getElementById('optionsModalContent');
-            content.innerHTML = '';
-            
-            options.forEach(option => {
-                const item = document.createElement('div');
-                item.className = 'setting-row';
-                item.style.cursor = 'pointer';
-                item.innerHTML = `
-                    <span class="setting-label">${option.label}</span>
-                    ${current === option.value ? '<span style="color: var(--primary);">✓</span>' : ''}
-                `;
-                item.onclick = () => {
-                    callback(option.value);
-                    closeModal('optionsModal');
-                };
-                content.appendChild(item);
-            });
-            
-            document.getElementById('optionsModal').classList.remove('hidden');
-        }
-
-        function savePlaylist() {
-            const name = document.getElementById('playlistName').value.trim();
-            if (!name) return alert('Please enter a playlist name');
-            if (builderWorkouts.length === 0) return alert('Please add at least one workout');
-
-            const playlist = {
-                id: editingPlaylistIndex >= 0 ? playlists[editingPlaylistIndex].id : Date.now(),
-                name: name,
-                color: builderSettings.color,
-                settings: { ...builderSettings },
-                workouts: builderWorkouts
-            };
-
-            if (editingPlaylistIndex >= 0) {
-                playlists[editingPlaylistIndex] = playlist;
-            } else {
-                playlists.push(playlist);
-            }
-
-            savePlaylists();
+            workouts.push(workout);
+            saveWorkouts();
             goHome();
         }
 
-        function startPlaylist(index) {
-            currentPlaylist = playlists[index];
-            currentWorkoutIndex = 0;
+        function deleteWorkout(index) {
+            if (confirm('Delete this workout?')) {
+                workouts.splice(index, 1);
+                saveWorkouts();
+                renderWorkoutsList();
+            }
+        }
+
+        // Workout Execution
+        function startWorkout(index) {
+            currentWorkout = workouts[index];
+            currentExerciseIndex = 0;
             displayExercise();
             showScreen('workout');
         }
 
-        function expandWorkoutsToExercises() {
-            const exercises = [];
-            currentPlaylist.workouts.forEach(workout => {
-                for (let set = 1; set <= workout.sets; set++) {
-                    exercises.push({
-                        name: workout.name,
-                        type: workout.type,
-                        reps: workout.reps,
-                        duration: workout.duration,
-                        set: set,
-                        totalSets: workout.sets
-                    });
-                }
-            });
-            return exercises;
-        }
-
         function displayExercise() {
-            const exercises = expandWorkoutsToExercises();
-            const exercise = exercises[currentWorkoutIndex];
+            const exercise = currentWorkout.exercises[currentExerciseIndex];
             
-            const progress = (currentWorkoutIndex / exercises.length) * 100;
-            const progressBar = document.getElementById('progressBar');
-            progressBar.style.width = progress + '%';
-            progressBar.style.background = currentPlaylist.color;
-            document.getElementById('progressPercentage').textContent = Math.round(progress) + '%';
-            document.getElementById('progressPercentage').style.color = currentPlaylist.color;
-            
-            const badge = document.getElementById('sectionBadge');
-            badge.textContent = `Set ${exercise.set} of ${exercise.totalSets}`;
-            badge.style.color = currentPlaylist.color;
-            
+            document.getElementById('sectionBadge').textContent = exercise.section;
             document.getElementById('exerciseTitle').textContent = exercise.name;
             
-            const subtitle = exercise.type === 'reps' ? `${exercise.reps} reps` : `${exercise.duration} seconds`;
+            let subtitle = '';
+            if (exercise.type === 'reps') {
+                subtitle = `${exercise.reps} reps`;
+                if (exercise.sets) subtitle += ` (Set ${exercise.currentSet}/${exercise.sets})`;
+            } else {
+                subtitle = `${exercise.duration} seconds`;
+                if (exercise.sets) subtitle += ` (Set ${exercise.currentSet}/${exercise.sets})`;
+            }
             document.getElementById('exerciseSubtitle').textContent = subtitle;
             
-            const pace = currentPlaylist.settings.pace === 'auto' ? 3 : parseInt(currentPlaylist.settings.pace) || 0;
-            
-            if (currentPlaylist.settings.timer !== 'off') {
-                if (exercise.type === 'reps' && pace > 0) {
-                    timeRemaining = exercise.reps * pace;
-                } else if (exercise.type === 'duration') {
-                    timeRemaining = exercise.duration;
+            // Timer
+            if (currentWorkout.timerEnabled) {
+                if (exercise.type === 'reps') {
+                    timeRemaining = exercise.reps * (exercise.pace || 3);
                 } else {
-                    timeRemaining = 0;
+                    timeRemaining = exercise.duration;
                 }
                 document.getElementById('timerDisplay').textContent = formatTime(timeRemaining);
             } else {
                 document.getElementById('timerDisplay').textContent = '--:--';
             }
             
-            const rhythmContainer = document.getElementById('rhythmContainer');
-            if (currentPlaylist.settings.rhythm !== 'off' && exercise.type === 'reps' && pace > 0) {
-                rhythmContainer.classList.remove('hidden');
+            // Rhythm
+            if (currentWorkout.rhythmEnabled && exercise.type === 'reps') {
+                document.getElementById('rhythmContainer').classList.remove('hidden');
                 document.getElementById('rhythmCircle').textContent = 'READY';
                 document.getElementById('rhythmCircle').className = 'rhythm-circle';
                 document.getElementById('repCounter').textContent = `Rep 0 / ${exercise.reps}`;
-                document.getElementById('repCounter').style.color = currentPlaylist.color;
             } else {
-                rhythmContainer.classList.add('hidden');
+                document.getElementById('rhythmContainer').classList.add('hidden');
             }
             
             document.getElementById('motivationText').textContent = getRandomMotivation();
             
+            // Reset controls
             const buttons = document.getElementById('controlButtons');
             buttons.className = 'control-buttons single';
-            buttons.innerHTML = `<button class="control-btn btn-start" style="background: ${currentPlaylist.color}; color: white;" onclick="startExercise()">Start</button>`;
+            buttons.innerHTML = '<button class="control-btn btn-start" onclick="startExercise()">Start</button>';
+            
+            updateProgress();
         }
 
         function startExercise() {
-            const exercises = expandWorkoutsToExercises();
-            const exercise = exercises[currentWorkoutIndex];
-            
+            const exercise = currentWorkout.exercises[currentExerciseIndex];
             currentRep = 0;
             isUp = false;
             isPaused = false;
@@ -1392,51 +1257,49 @@
             buttons.className = 'control-buttons';
             buttons.innerHTML = `
                 <button class="control-btn btn-pause" onclick="pauseExercise()">Pause</button>
-                <button class="control-btn btn-skip" style="color: ${currentPlaylist.color};" onclick="skipExercise()">Skip</button>
+                <button class="control-btn btn-skip" onclick="skipExercise()">Skip</button>
             `;
             
-            const pace = currentPlaylist.settings.pace === 'auto' ? 3 : parseInt(currentPlaylist.settings.pace) || 0;
-            
-            if (currentPlaylist.settings.timer !== 'off' && pace > 0) {
-                if (exercise.type === 'reps' && currentPlaylist.settings.rhythm !== 'off') {
-                    startRepExercise(exercise, pace);
+            if (currentWorkout.timerEnabled) {
+                if (exercise.type === 'reps' && currentWorkout.rhythmEnabled) {
+                    startRepExercise();
                 } else {
-                    startTimerExercise(exercise, pace);
+                    startTimerExercise();
                 }
             } else {
+                // Manual mode
                 startManualMode();
             }
         }
 
-        function startRepExercise(exercise, pace) {
-            const halfPace = pace / 2;
+        function startRepExercise() {
+            const exercise = currentWorkout.exercises[currentExerciseIndex];
+            const repTime = exercise.pace || 3;
+            const halfRepTime = repTime / 2;
             let elapsed = 0;
             
             timer = setInterval(() => {
                 if (isPaused) return;
                 
                 elapsed += 0.1;
-                timeRemaining = Math.max(0, exercise.reps * pace - elapsed);
+                timeRemaining = Math.max(0, exercise.reps * repTime - elapsed);
                 document.getElementById('timerDisplay').textContent = formatTime(Math.ceil(timeRemaining));
                 
-                const currentRepProgress = elapsed % pace;
-                const rhythmCircle = document.getElementById('rhythmCircle');
+                const currentRepProgress = elapsed % repTime;
                 
-                if (currentRepProgress < halfPace) {
+                if (currentRepProgress < halfRepTime) {
                     if (!isUp) {
                         isUp = true;
                         currentRep++;
                         document.getElementById('repCounter').textContent = `Rep ${currentRep} / ${exercise.reps}`;
                         updateMotivation();
                     }
-                    rhythmCircle.textContent = 'UP ⬆️';
-                    rhythmCircle.className = 'rhythm-circle up';
-                    rhythmCircle.style.background = currentPlaylist.color;
+                    document.getElementById('rhythmCircle').textContent = 'UP ⬆️';
+                    document.getElementById('rhythmCircle').className = 'rhythm-circle up';
                 } else {
                     isUp = false;
-                    rhythmCircle.textContent = 'DOWN ⬇️';
-                    rhythmCircle.className = 'rhythm-circle down';
-                    rhythmCircle.style.background = '';
+                    document.getElementById('rhythmCircle').textContent = 'DOWN ⬇️';
+                    document.getElementById('rhythmCircle').className = 'rhythm-circle down';
                 }
                 
                 if (timeRemaining <= 0) {
@@ -1465,13 +1328,15 @@
         function startManualMode() {
             const buttons = document.getElementById('controlButtons');
             buttons.className = 'control-buttons single';
-            buttons.innerHTML = `<button class="control-btn btn-start" style="background: ${currentPlaylist.color}; color: white;" onclick="completeExercise()">Done</button>`;
+            buttons.innerHTML = '<button class="control-btn btn-start" onclick="completeExercise()">Done</button>';
         }
 
         function pauseExercise() {
             isPaused = !isPaused;
             const pauseBtn = document.querySelector('.btn-pause');
-            if (pauseBtn) pauseBtn.textContent = isPaused ? 'Resume' : 'Pause';
+            if (pauseBtn) {
+                pauseBtn.textContent = isPaused ? 'Resume' : 'Pause';
+            }
         }
 
         function skipExercise() {
@@ -1482,21 +1347,18 @@
         function completeExercise() {
             if (timer) clearInterval(timer);
             
-            const rhythmCircle = document.getElementById('rhythmCircle');
-            if (!document.getElementById('rhythmContainer').classList.contains('hidden')) {
-                rhythmCircle.textContent = '✓';
-                rhythmCircle.className = 'rhythm-circle up';
-                rhythmCircle.style.background = currentPlaylist.color;
-            }
+            document.getElementById('rhythmCircle').textContent = '✓';
+            document.getElementById('rhythmCircle').className = 'rhythm-circle up';
             
-            setTimeout(() => nextExercise(), 800);
+            setTimeout(() => {
+                nextExercise();
+            }, 800);
         }
 
         function nextExercise() {
-            const exercises = expandWorkoutsToExercises();
-            currentWorkoutIndex++;
+            currentExerciseIndex++;
             
-            if (currentWorkoutIndex >= exercises.length) {
+            if (currentExerciseIndex >= currentWorkout.exercises.length) {
                 showCompletion();
             } else {
                 displayExercise();
@@ -1504,15 +1366,12 @@
         }
 
         function showCompletion() {
-            document.getElementById('totalTime').textContent = `${calculatePlaylistTime(currentPlaylist)} min`;
-            const exercises = expandWorkoutsToExercises();
-            document.getElementById('totalExercises').textContent = exercises.length;
-            
-            document.querySelectorAll('.stat-value').forEach(val => val.style.color = currentPlaylist.color);
-            
+            document.getElementById('totalTime').textContent = `${calculateWorkoutTime(currentWorkout)} min`;
+            document.getElementById('totalExercises').textContent = currentWorkout.exercises.length;
             showScreen('completion');
         }
 
+        // Utilities
         function formatTime(seconds) {
             const mins = Math.floor(seconds / 60);
             const secs = seconds % 60;
@@ -1524,8 +1383,7 @@
         }
 
         function updateMotivation() {
-            const exercises = expandWorkoutsToExercises();
-            const exercise = exercises[currentWorkoutIndex];
+            const exercise = currentWorkout.exercises[currentExerciseIndex];
             const motivationText = document.getElementById('motivationText');
             
             if (exercise.type === 'reps' && currentRep === Math.floor(exercise.reps / 2)) {
@@ -1539,11 +1397,13 @@
             }
         }
 
-        function closeModal(modalId, event) {
-            if (event && event.target !== event.currentTarget) return;
-            document.getElementById(modalId).classList.add('hidden');
+        function updateProgress() {
+            const progress = (currentExerciseIndex / currentWorkout.exercises.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressPercentage').textContent = Math.round(progress) + '%';
         }
 
+        // Initialize app
         init();
     </script>
 </body>
